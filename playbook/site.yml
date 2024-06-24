@@ -12,20 +12,20 @@
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
-            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.noarch.rpm"
           with_items: "{{ clickhouse_packages }}"
       rescue:
         - name: Get clickhouse distrib
           ansible.builtin.get_url:
             url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
-            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
     - name: Install clickhouse packages
       become: true
       ansible.builtin.yum:
         name:
-          - clickhouse-common-static-{{ clickhouse_version }}.rpm
-          - clickhouse-client-{{ clickhouse_version }}.rpm
-          - clickhouse-server-{{ clickhouse_version }}.rpm
+          - clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm
+          - clickhouse-client-{{ clickhouse_version }}.noarch.rpm
+          - clickhouse-server-{{ clickhouse_version }}.noarch.rpm
       notify: Start clickhouse service
     - name: Flush handlers
       meta: flush_handlers
@@ -50,11 +50,11 @@
     ansible.builtin.yum:
       name:
         - nano
-  
+
   - name: Add user vector
     user:
       name: vector
-      
+
   - name: Create Directories
     file:
       path: "{{ item }}"
@@ -71,11 +71,11 @@
   - name: Get vector distrib
     ansible.builtin.get_url:
       url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-x86_64-unknown-linux-musl.tar.gz"
-      dest: "/vector/vector-{{ clickhouse_version }}.tar.gz"
+      dest: "/vector/vector-{{ vector_version }}.tar.gz"
 
   - name: Unpack vector
     unarchive:
-      src: "/vector/vector-{{ clickhouse_version }}.tar.gz"
+      src: "/vector/vector-{{ vector_version }}.tar.gz"
       dest: "/vector/"
       remote_src: yes
 
