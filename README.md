@@ -26,6 +26,25 @@
 
 ![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-01-02-hw.png)
 
+## Доработка решения от 24.06.2024
+
+Запустил `ansible-lint site.yml` и исправил ошибки:
+
+![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-05-01-hw.png)
+
+![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-05-02-hw.png)
+
+Запустил playbook на этом окружении с флагом `--check`:
+
+![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-06-01-hw.png)
+
+Запустил playbook на `prod.yml` окружении с флагом `--diff`:
+
+![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-07-01-hw.png)
+
+Повторно запустил playbook с флагом `--diff` и убедился, что playbook идемпотентен:
+
+![alt text](https://github.com/artmur1/18-02-hw/blob/main/img/18-02-08-01-hw.png)
 
 ---
 
